@@ -6,6 +6,12 @@ import {
 } from '@heroicons/react/24/outline';
 import { lusitana } from '@/app/ui/fonts';
 import { fetchCardData } from '@/app/lib/data';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../redux/store';
+import actions from '../../redux/actions';
+
+const {invoiceAction} = actions;
 
 const iconMap = {
   collected: BanknotesIcon,
@@ -15,6 +21,9 @@ const iconMap = {
 };
 
 export default async function CardWrapper() {
+
+    const  listInvoices  =  useSelector((state: RootState) => state.invoices.list);
+
   const {
     numberOfInvoices,
     numberOfCustomers,
@@ -27,7 +36,7 @@ export default async function CardWrapper() {
 
       <Card title="Collected" value={totalPaidInvoices} type="collected" />
       <Card title="Pending" value={totalPendingInvoices} type="pending" />
-      <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
+      <Card title="Total Invoices reduces" value={listInvoices.length} type="invoices" />
       <Card
         title="Total Customers"
         value={numberOfCustomers}

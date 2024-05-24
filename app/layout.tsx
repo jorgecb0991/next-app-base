@@ -1,6 +1,9 @@
 import '@/app/ui/global.css';
 import { inter } from '@/app/ui/fonts';
 import { Metadata } from 'next';
+import { Provider } from 'react-redux';
+import store from '@/app/redux/store'; // Ajusta la ruta según la estructura de tu proyecto
+
 
 export const metadata: Metadata = {
   title: {
@@ -18,7 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${inter.className} antialiased`}>
+        <Provider store={store}>
+          {children}
+        </Provider>
+      </body>
     </html>
   );
 }
